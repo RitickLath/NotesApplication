@@ -2,11 +2,11 @@ import React from "react";
 import Header from "./component/Header";
 import Navbar from "./component/Navbar";
 
-const App = () => {
+const App = ({ children }) => {
   return (
-    <div className="px-3 sm:px-4 lg:px-12">
+    <div className="bg-[#1f2123] text-white min-h-[100vh] min-w-full px-6 sm:px-8 md:px-16 lg:px-20">
       <Navbar />
-      <Header />
+      {children}
     </div>
   );
 };
