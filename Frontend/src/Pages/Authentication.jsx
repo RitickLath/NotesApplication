@@ -10,6 +10,7 @@ const Authentication = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
   };
 
   return (

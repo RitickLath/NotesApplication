@@ -2,9 +2,10 @@ import React from "react";
 import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
 import App from "./App";
 import Authentication from "./Pages/Authentication";
-import InputPage from "./Pages/InputPage";
+import CreateNotes from "./Pages/CreateNotes";
 import Dashboard from "./Pages/Dashboard";
 import Header from "./component/Header";
+import EditNotes from "./Pages/EditNotes";
 
 const Layout = () => {
   return (
@@ -30,7 +31,7 @@ const Layout = () => {
           path="notes"
           element={
             <App>
-              <InputPage />
+              <CreateNotes />
             </App>
           }
         />
@@ -39,6 +40,14 @@ const Layout = () => {
           element={
             <App>
               <Dashboard />
+            </App>
+          }
+        />
+        <Route
+          path="/editnotes"
+          element={
+            <App>
+              <EditNotes />
             </App>
           }
         />
