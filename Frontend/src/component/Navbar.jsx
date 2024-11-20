@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { authAtom } from "../store/AuthStatus";
+import { useRecoilState } from "recoil";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const [isAuth, setIsAuth] = useRecoilState(authAtom);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuth(false);
+    navigate("/auth");
+  };
 
   return (
     <nav className="flex justify-between items-center py-4 px-6 text-white">
@@ -25,18 +34,31 @@ const Navbar = () => {
         >
           Home
         </button>
-        <button
-          onClick={() => navigate("/auth")}
-          className="hover:text-blue-400 transition"
-        >
-          Sign In
-        </button>
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="hover:text-blue-400 transition"
-        >
-          My Notes
-        </button>
+
+        {/* Conditionally render based on authentication */}
+        {isAuth ? (
+          <>
+            <button
+              onClick={handleLogout}
+              className="hover:text-blue-400 transition"
+            >
+              Log Out
+            </button>
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="hover:text-blue-400 transition"
+            >
+              My Notes
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => navigate("/auth")}
+            className="hover:text-blue-400 transition"
+          >
+            Sign In
+          </button>
+        )}
       </div>
 
       {/* Mobile Menu */}
@@ -63,25 +85,31 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={() => {
-                    navigate("/auth");
-                    setShow(false);
+                    if (isAuth) {
+                      handleLogout();
+                    } else {
+                      navigate("/auth");
+                      setShow(false);
+                    }
                   }}
                   className="block w-full text-left hover:text-blue-400 transition"
                 >
-                  Sign In
+                  {isAuth ? "Log Out" : "Sign In"}
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => {
-                    navigate("/dashboard");
-                    setShow(false);
-                  }}
-                  className="block w-full text-left hover:text-blue-400 transition"
-                >
-                  My Notes
-                </button>
-              </li>
+              {isAuth && (
+                <li>
+                  <button
+                    onClick={() => {
+                      navigate("/dashboard");
+                      setShow(false);
+                    }}
+                    className="block w-full text-left hover:text-blue-400 transition"
+                  >
+                    My Notes
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         )}

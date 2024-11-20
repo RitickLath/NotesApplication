@@ -1,13 +1,16 @@
 import React from "react";
-import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App";
 import Authentication from "./Pages/Authentication";
 import CreateNotes from "./Pages/CreateNotes";
 import Dashboard from "./Pages/Dashboard";
 import Header from "./component/Header";
 import EditNotes from "./Pages/EditNotes";
+import { authAtom } from "./store/AuthStatus";
+import { useRecoilState } from "recoil";
 
 const Layout = () => {
+  const [isAuth, setIsAuth] = useRecoilState(authAtom);
   return (
     <BrowserRouter>
       <Routes>
@@ -19,36 +22,53 @@ const Layout = () => {
             </App>
           }
         />
+
         <Route
           path="/auth"
           element={
-            <App>
-              <Authentication />
-            </App>
+            isAuth ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <App>
+                <Authentication />
+              </App>
+            )
           }
         />
         <Route
-          path="notes"
+          path="/notes"
           element={
-            <App>
-              <CreateNotes />
-            </App>
+            isAuth ? (
+              <App>
+                <CreateNotes />
+              </App>
+            ) : (
+              <Navigate to="/auth" />
+            )
           }
         />
         <Route
           path="/dashboard"
           element={
-            <App>
-              <Dashboard />
-            </App>
+            isAuth ? (
+              <App>
+                <Dashboard />
+              </App>
+            ) : (
+              <Navigate to="/auth" />
+            )
           }
         />
         <Route
           path="/editnotes"
           element={
-            <App>
-              <EditNotes />
-            </App>
+            isAuth ? (
+              <App>
+                <EditNotes />
+              </App>
+            ) : (
+              <Navigate to="/auth" />
+            )
           }
         />
       </Routes>

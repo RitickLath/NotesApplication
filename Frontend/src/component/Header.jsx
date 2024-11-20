@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { authAtom } from "../store/AuthStatus";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useRecoilState(authAtom);
   return (
     <div className="flex flex-col items-center w-full py-12 lg:py-28">
       <h1 className="text-3xl lg:text-5xl font-semibold text-center">
@@ -14,11 +17,15 @@ const Header = () => {
       </h2>
       <button
         onClick={() => {
+          if (isAuth) {
+            navigate("/dashboard");
+            console.log("Logged in");
+          }
           navigate("/auth");
         }}
         className="lg:text-lg py-1 px-3 bg-blue-600 hover:bg-blue-700 rounded-md"
       >
-        Sign Up Now
+        {isAuth ? "Dashboard" : "Sign Up Now"}
       </button>
     </div>
   );
