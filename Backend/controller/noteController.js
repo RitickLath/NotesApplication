@@ -1,5 +1,6 @@
 const Note = require("../model/note");
 
+// Create a note
 exports.createNote = async (req, res) => {
   try {
     const { title, content } = req.body;
@@ -12,6 +13,7 @@ exports.createNote = async (req, res) => {
   }
 };
 
+// Get all notes for a user
 exports.getAllNotes = async (req, res) => {
   try {
     const notes = await Note.find({ user: req.userId });
@@ -23,6 +25,23 @@ exports.getAllNotes = async (req, res) => {
   }
 };
 
+// Get a single note by ID
+exports.getNoteById = async (req, res) => {
+  try {
+    const { noteId } = req.params;
+    const note = await Note.findOne({ _id: noteId, user: req.userId });
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+    res.status(200).json(note);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error fetching note", error: err.message });
+  }
+};
+
+// Update a note
 exports.updateNote = async (req, res) => {
   try {
     const { noteId } = req.params;
@@ -40,6 +59,7 @@ exports.updateNote = async (req, res) => {
   }
 };
 
+// Delete a note
 exports.deleteNote = async (req, res) => {
   try {
     const { noteId } = req.params;

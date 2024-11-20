@@ -29,8 +29,8 @@ const Authentication = () => {
     }
 
     const endpoint = isUser
-      ? "http://localhost:3000/api/users/login"
-      : "http://localhost:3000/api/users/signup";
+      ? "https://notes-33mc.onrender.com/api/users/login"
+      : "https://notes-33mc.onrender.com/api/users/signup";
 
     // Data to send to the API
     const payload = isUser

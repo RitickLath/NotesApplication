@@ -6,7 +6,7 @@ const NotesCard = ({ title, desc, id }) => {
   return (
     <div
       onClick={() => {
-        alert(id);
+        // alert(id);
         navigate("/editnotes/" + id);
       }}
       className="flex flex-col cursor-pointer mt-6 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] min-h-[200px] p-6 rounded-lg shadow-lg hover:shadow-xl"

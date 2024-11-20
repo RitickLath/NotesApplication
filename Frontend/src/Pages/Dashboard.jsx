@@ -23,11 +23,14 @@ const Dashboard = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:3000/api/notes", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://notes-33mc.onrender.com/api/notes",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setNotes(response.data);
         setFilteredNotes(response.data); // Initialize filtered notes

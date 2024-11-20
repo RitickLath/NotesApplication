@@ -17,7 +17,7 @@ const CreateNotes = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/api/notes",
+        "https://notes-33mc.onrender.com/api/notes",
         {
           title,
           content: desc,
