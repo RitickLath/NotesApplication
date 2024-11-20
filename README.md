@@ -3,6 +3,13 @@
 ## Overview
 A React-based frontend for a note-taking app. Users can sign up, log in, and manage notes (create, edit, delete) with secure JWT authentication.
 
+## Working Demo
+
+
+https://github.com/user-attachments/assets/dde9688b-5e2d-42cc-bb4d-f11b38ca1d68
+
+
+
 ## Features
 
 - **User Authentication**: Sign up, log in, and store JWT tokens for authentication.
