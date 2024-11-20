@@ -1,19 +1,47 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-const CreateNotes = ({ addNote }) => {
+const CreateNotes = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleAddNote = () => {
-    const newNote = { title, desc };
-    if (addNote) addNote(newNote);
+  const handleAddNote = async (e) => {
+    e.preventDefault();
 
-    setTitle("");
-    setDesc("");
+    if (!title || !desc) {
+      setMessage("Please provide both a title and a description.");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://localhost:3000/api/notes",
+        {
+          title,
+          content: desc,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+
+      if (response.status === 201) {
+        setMessage("Note created successfully!");
+        setTitle("");
+        setDesc("");
+      }
+    } catch (error) {
+      setMessage(error.response?.data?.message || "An error occurred.");
+    }
   };
 
   return (
-    <div className="mt-12  mx-auto">
+    <div className="mt-12 mx-auto">
       <h2 className="outline-none text-2xl font-bold mb-6 text-center">
         Create a New Note
       </h2>
@@ -44,6 +72,9 @@ const CreateNotes = ({ addNote }) => {
             Add Note
           </button>
         </div>
+
+        {/* Message Display */}
+        {message && <p className="text-center text-red-500 mt-4">{message}</p>}
       </div>
     </div>
   );

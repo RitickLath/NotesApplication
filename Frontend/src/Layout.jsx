@@ -60,7 +60,7 @@ const Layout = () => {
           }
         />
         <Route
-          path="/editnotes"
+          path="/editnotes/:id"
           element={
             isAuth ? (
               <App>

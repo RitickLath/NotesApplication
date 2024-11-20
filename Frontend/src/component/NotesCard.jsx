@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const NotesCard = ({ title, desc }) => {
+const NotesCard = ({ title, desc, id }) => {
   const navigate = useNavigate();
   return (
     <div
       onClick={() => {
-        navigate("/editnotes");
+        alert(id);
+        navigate("/editnotes/" + id);
       }}
       className="flex flex-col cursor-pointer mt-6 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] min-h-[200px] p-6 rounded-lg shadow-lg hover:shadow-xl"
     >
