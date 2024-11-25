@@ -42,7 +42,7 @@ const CreateNotes = ({ show, setShowDiv }) => {
   };
 
   return (
-    <div className="bg-blue-700 p-4 mt-12 mx-auto">
+    <div className="z-30 bg-blue-700 p-4 mt-12 mx-auto">
       <h2 className="outline-none text-2xl font-bold mb-6 text-center">
         Create a New Note
       </h2>
