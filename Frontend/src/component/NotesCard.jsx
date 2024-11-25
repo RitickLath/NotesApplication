@@ -9,10 +9,7 @@ const NotesCard = ({ title, desc, id, additonalClass }) => {
         // alert(id);
         navigate("/editnotes/" + id);
       }}
-      className={
-        "flex flex-col cursor-pointer mt-6 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] min-h-[200px] p-6 rounded-lg shadow-lg hover:shadow-xl" +
-        additonalClass
-      }
+      className={`flex ${additonalClass} flex-col cursor-pointer mt-6 w-full sm:w-[250px] md:w-[300px] lg:w-[350px] min-h-[200px] p-6 rounded-lg shadow-lg hover:shadow-xl`}
     >
       <h1 className="text-xl font-bold text-gray-100 mb-4 truncate">{title}</h1>
       <p className="text-gray-300 text-sm line-clamp-4">

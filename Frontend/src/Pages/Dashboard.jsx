@@ -3,7 +3,14 @@ import NotesCard from "../component/NotesCard";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const colors = ["bg-red-200", "bg-blue-200", "bg-green-200", "bg-gray-200", "bg-red-500", "bg-blue-400"]
+const colors = [
+  "bg-red-200",
+  "bg-blue-200",
+  "bg-green-200",
+  "bg-gray-200",
+  "bg-red-500",
+  "bg-blue-400",
+];
 
 const Dashboard = () => {
   const [notes, setNotes] = useState([]); // Original notes fetched from backend
@@ -13,8 +20,6 @@ const Dashboard = () => {
   const [sortCriteria, setSortCriteria] = useState("created");
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-
-
 
   // Fetch notes from backend
   useEffect(() => {
@@ -110,7 +115,7 @@ const Dashboard = () => {
           <div className="flex flex-wrap gap-6 mt-6">
             {sortedNotes.map((note, i) => (
               <NotesCard
-              additonalClass={colors[i%colors.length]}
+                additonalClass={colors[i]}
                 key={note._id}
                 title={note.title}
                 desc={note.content}
