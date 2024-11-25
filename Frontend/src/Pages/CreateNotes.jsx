@@ -34,7 +34,7 @@ const CreateNotes = ({ show, setShowDiv }) => {
         setMessage("Note created successfully!");
         setTitle("");
         setDesc("");
-        setShowDiv(false);
+        setShowDiv(true);
       }
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred.");
