@@ -118,7 +118,7 @@ const Dashboard = () => {
 
           <div
             className={`${
-              showDiv ? "" : "opacity-10 absolute"
+              showDiv ? "" : "opacity-10 hidden absolute"
             } flex flex-wrap gap-6 mt-6`}
           >
             {sortedNotes.map((note, i) => (
