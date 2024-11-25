@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import NotesCard from "../component/NotesCard";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import CreateNotes from "./CreateNotes";
 
 const colors = [
-  "bg-red-200",
-  "bg-blue-200",
-  "bg-green-200",
-  "bg-gray-200",
-  "bg-red-500",
-  "bg-blue-400",
+  "bg-red-700",
+  "bg-blue-700",
+  "bg-green-700",
+  "bg-gray-700",
+  "bg-red-700",
+  "bg-blue-700",
 ];
 
 const Dashboard = () => {
@@ -19,6 +20,7 @@ const Dashboard = () => {
   const [error, setError] = useState("");
   const [sortCriteria, setSortCriteria] = useState("created");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showDiv, setShowDiv] = useState(true);
   const navigate = useNavigate();
 
   // Fetch notes from backend
@@ -82,7 +84,7 @@ const Dashboard = () => {
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {!loading && !error && (
-        <>
+        <div>
           {/* Search Input */}
           <input
             className="w-full px-4 text-gray-800 py-2 bg-gray-100 border-[1px] border-gray-300 rounded-md outline-none"
@@ -104,15 +106,21 @@ const Dashboard = () => {
                 <option value="updated">Updation Date</option>
               </select>
             </div>
+
+            {/* implement  */}
             <button
-              onClick={() => navigate("/notes")}
+              onClick={() => setShowDiv(false)}
               className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md shadow-md"
             >
-              Add Notes
+              Add Note
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-6 mt-6">
+          <div
+            className={`${
+              showDiv ? "" : "z-10 opacity-10 absolute"
+            } flex flex-wrap gap-6 mt-6`}
+          >
             {sortedNotes.map((note, i) => (
               <NotesCard
                 additonalClass={colors[i]}
@@ -127,8 +135,11 @@ const Dashboard = () => {
           {sortedNotes.length === 0 && (
             <p className="text-center text-gray-500">No notes found.</p>
           )}
-        </>
+        </div>
       )}
+
+      {/* show the div  when clicked to add note*/}
+      {!showDiv && <CreateNotes show={showDiv} setShowDiv={setShowDiv} />}
     </div>
   );
 };

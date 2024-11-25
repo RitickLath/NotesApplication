@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const CreateNotes = () => {
+const CreateNotes = ({ show, setShowDiv }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [message, setMessage] = useState("");
@@ -34,6 +34,7 @@ const CreateNotes = () => {
         setMessage("Note created successfully!");
         setTitle("");
         setDesc("");
+        setShowDiv(false);
       }
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred.");
@@ -41,7 +42,7 @@ const CreateNotes = () => {
   };
 
   return (
-    <div className="mt-12 mx-auto">
+    <div className="bg-blue-700 p-4 mt-12 mx-auto">
       <h2 className="outline-none text-2xl font-bold mb-6 text-center">
         Create a New Note
       </h2>
