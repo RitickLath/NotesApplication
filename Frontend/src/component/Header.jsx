@@ -36,7 +36,7 @@ const Header = () => {
       {/* Right Image */}
       <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
         <img
-          src="\public\Image\banner.jpg"
+          src="\Image\banner.jpg"
           alt="Let Your Thoughts Flow"
           className="w-full max-w-sm lg:max-w-md shadow-md rounded-lg"
         />
